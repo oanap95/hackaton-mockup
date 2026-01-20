@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penneo Pricing Mockup | Localhost</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Basic reset */
+        body { margin: 0; padding: 0; background-color: #fcfcfc; color: #00334e; font-family: "Montserrat", sans-serif; }
+        #younium-complete-mockup { max-width: 1200px; margin: 20px auto; line-height: 1.5; padding: 20px; }
+        .hidden { display: none !important; }
+
+        /* Currency Selector */
+        .ccy-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
+        .ccy-btn { padding: 8px 20px; border: 1px solid #00334e; background: #fff; color: #00334e; border-radius: 20px; cursor: pointer; font-weight: 600; }
+        .ccy-btn.active { background: #00334e; color: #fff; }
+
+        /* Grid & Cards */
+        .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 20px; }
+        .p-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 40px 30px; display: flex; flex-direction: column; position: relative; }
+        .p-card.featured { border: 2px solid #29c27f; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .popular-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #29c27f; color: white; padding: 4px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; letter-spacing: 1px; white-space: nowrap; }
+        
+        .p-card h3 { color: #00334e; font-size: 1.5rem; margin: 0 0 15px 0; }
+        .p-price { font-size: 2.2rem; font-weight: 700; color: #00334e; margin: 10px 0; }
+        .p-sub { font-size: 0.85rem; color: #718096; margin-bottom: 25px; }
+        .feat-list { list-style: none; padding: 0; margin: 0 0 30px 0; flex-grow: 1; }
+        .feat-list li { margin-bottom: 12px; font-size: 0.9rem; display: flex; align-items: flex-start; gap: 10px; }
+        .feat-list i { color: #29c27f; margin-top: 3px; }
+
+        /* Shared Button Style */
+        .mock-btn { 
+            display: block; width: 100%; padding: 14px 0; border-radius: 6px; 
+            text-align: center; font-weight: 700; cursor: pointer; border: none; 
+            transition: 0.2s; text-decoration: none; box-sizing: border-box; 
+            font-size: 14px; font-family: "Montserrat", sans-serif; 
+        }
+        .btn-navy { background: #00334e; color: #fff; }
+        .btn-green { background: #29c27f; color: #fff; }
+        .btn-outline { background: transparent; border: 2px solid #00334e; color: #00334e; }
+        .btn-stripe { background: #635bff; color: #fff; }
+
+        /* --- STEP 1 LAYOUT (Image 1) --- */
+        #view-step-1 { background: #f8fafb; border-radius: 16px; overflow: hidden; display: flex; box-shadow: 0 10px 30px rgba(0,0,0,0.1); min-height: 500px; }
+        .side-panel { background: #001a27; color: white; padding: 40px; width: 30%; display: flex; flex-direction: column; }
+        .form-panel { padding: 40px; width: 70%; background: #fff; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        label { display: block; font-size: 0.8rem; color: #666; margin-bottom: 5px; font-weight: 600; }
+        input[type="text"], input[type="email"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+
+        /* --- STEP 2 LAYOUT (Image 2) --- */
+        #view-step-2 { background: #fff; padding: 60px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 900px; margin: 0 auto; display: flex; gap: 60px; }
+        .pay-summary { width: 40%; }
+        .pay-form { width: 60%; }
+        .stripe-el { border: 1px solid #e0e0e0; padding: 12px; border-radius: 4px; background: #fff; margin: 10px 0; display: flex; align-items: center; justify-content: space-between; color: #aaa; }
+
+        .addons-mention { margin-top: 40px; padding: 20px; background: #f8fafb; border-radius: 8px; text-align: center; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            #view-step-1 { flex-direction: column; }
+            .side-panel, .form-panel { width: 100%; }
+            #view-step-2 { flex-direction: column; padding: 30px; }
+            .pay-summary, .pay-form { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="younium-complete-mockup">
+    <div id="view-pricing">
+        <h3 style="text-align: center;">Select your currency:</h3>
+        <div class="ccy-tabs">
+            <button class="ccy-btn active" onclick="setCurrency('EUR')">EUR</button>
+            <button class="ccy-btn" onclick="setCurrency('DKK')">DKK</button>
+            <button class="ccy-btn" onclick="setCurrency('NOK')">NOK</button>
+        </div>
+
+        <div class="p-grid">
+            <div class="p-card">
+                <h3>Sign Essential</h3>
+                <div class="p-price"><span class="cur-sym">€</span><span id="pr-ess">88</span></div>
+                <div class="p-sub">per month, billed annually</div>
+                <ul class="feat-list">
+                    <li><i class="fa fa-check"></i> 500 signatures included</li>
+                    <li><i class="fa fa-check"></i> Digital signing with national eIDs</li>
+                    <li><i class="fa fa-check"></i> Document archive</li>
+                    <li><i class="fa fa-check"></i> SSO</li>
+                    <li><i class="fa fa-check"></i> SMS verification</li>
+                </ul>
+                <button class="mock-btn btn-navy" onclick="checkout('Sign Essential', 'ess')">BUY NOW</button>
+            </div>
+
+            <div class="p-card featured">
+                <div class="popular-badge">MOST POPULAR</div>
+                <h3>Sign Plus</h3>
+                <div class="p-price"><span class="cur-sym">€</span><span id="pr-plus">154</span></div>
+                <div class="p-sub">per month, billed annually</div>
+                <ul class="feat-list">
+                    <li><i class="fa fa-check"></i> Everything in Essential</li>
+                    <li><i class="fa fa-check"></i> <strong>Industry-specific signing flows</strong></li>
+                    <li><i class="fa fa-check"></i> <strong>Integrations (excl. Caseware)</strong></li>
+                </ul>
+                <button class="mock-btn btn-green" onclick="checkout('Sign Plus', 'plus')">BUY NOW</button>
+            </div>
+
+            <div class="p-card">
+                <h3>Sign Pro</h3>
+                <div class="p-price">Custom</div>
+                <div class="p-sub">Bespoke Enterprise pricing</div>
+                <ul class="feat-list">
+                    <li><i class="fa fa-check"></i> Everything in Plus</li>
+                    <li><i class="fa fa-check"></i> <strong>Dedicated support hotline</strong></li>
+                    <li><i class="fa fa-check"></i> <strong>Personalised onboarding</strong></li>
+                    <li><i class="fa fa-check"></i> <strong>API Sandbox access</strong></li>
+                    <li><i class="fa fa-check"></i> <strong>Dedicated Success Manager</strong></li>
+                </ul>
+                <a href="https://penneo.com/get-a-quote/" class="mock-btn btn-outline">GET A QUOTE</a>
+            </div>
+        </div>
+
+        <div class="addons-mention">
+            <p><strong>Interested in enhancing your workflow with any of our add-ons?</strong> <a href="https://penneo.com/get-a-quote/" style="text-decoration: underline; color: #00334e;">Book a meeting</a> with our sales team for a tailored solution.</p>
+        </div>
+    </div>
+
+    <div id="view-step-1" class="hidden">
+        <div class="side-panel">
+            <button onclick="setView('view-pricing')" style="background:rgba(255,255,255,0.1); border:1px solid #fff; color:#fff; padding:5px 15px; cursor:pointer; width: fit-content; margin-bottom: 50px; border-radius: 4px;">Back</button>
+            <h1 id="side-plan-name" style="font-size: 2rem; margin-bottom: 0; font-weight: 700; color: #fff;">Sign Plus</h1>
+            <h2 id="side-plan-price" style="font-size: 1.8rem; margin-top: 10px; font-weight: 400; color: #fff;">1,848.00</h2>
+            <h2 class="cur-sym-text" style="font-size: 1.5rem; margin-top: -10px; font-weight: 700; color: #fff;"></h2>
+        </div>
+        <div class="form-panel">
+            <div class="form-grid">
+                <div><label>Company legal name</label><input type="text"></div>
+                <div><label>V.A.T. number</label><input type="text"></div>
+                <div><label>Billing email</label><input type="email"></div>
+                <div><label>Street</label><input type="text"></div>
+                <div><label>Country</label><input type="text"></div>
+                <div><label>City</label><input type="text"></div>
+                <div><label>Zip</label><input type="text"></div>
+                <div style="grid-column: span 2; margin-top: 10px;">
+                    <input type="checkbox" id="terms" style="width: auto; margin-right: 10px;"> 
+                    <label style="display:inline; font-weight: 400;">I agree to the <a href="https://penneo.com/terms/" style="color: blue; text-decoration: underline;">terms and conditions</a></label>
+                </div>
+            </div>
+            <button class="mock-btn btn-green" style="width: 250px; margin-top: 30px; background: #086afa; color: #fff;" onclick="goToStep2()">Buy now</button>
+        </div>
+    </div>
+
+    <div id="view-step-2" class="hidden">
+        <div id="step-payment">
+            <div class="pay-summary">
+                <div style="color: #999; font-size: 0.75rem; margin-bottom: 30px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa fa-arrow-left" style="cursor:pointer" onclick="setView('view-step-1')"></i> 
+                </div>
+                <h1 id="pay-total-display" style="margin: 0; font-size: 2.8rem; font-weight: 700;">€1,848.00</h1>
+            </div>
+            <div class="pay-form">
+                <h3 style="font-size: 1.2rem; margin-top: 0;">Pay with card</h3>
+                <label>Email</label>
+                <input type="text" value="eric@younium.com">
+                
+                <h3 style="margin-top: 40px; font-size: 1rem;">Payment method</h3>
+                <label>Card information</label>
+                <div class="stripe-el">
+                    <span>1234 1234 1234 1234</span>
+                    <div style="display:flex; gap: 5px;">
+                        <i class="fa-brands fa-cc-visa"></i>
+                        <i class="fa-brands fa-cc-mastercard"></i>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 15px;">
+                    <div style="flex: 1;"><input type="text" placeholder="MM / YY"></div>
+                    <div style="flex: 1;"><input type="text" placeholder="CVC"></div>
+                </div>
+                <label>Cardholder name</label>
+                <input type="text" placeholder="Full name on card">
+                <label>Country or region</label>
+                <select style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: Montserrat;">
+                    <option>Denmark</option><option>Norway</option><option>Sweden</option>
+                </select>
+                <button class="mock-btn btn-stripe" style="margin-top: 30px;" onclick="processPayment()">Pay</button>
+                <p style="font-size: 0.75rem; color: #999; text-align: left; margin-top: 25px;">
+                    By confirming your payment, you allow YOUNIUM to charge you for this payment and future payments in accordance with their terms.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-success" class="hidden" style="text-align:center; padding:100px 0;">
+        <i class="fa-solid fa-circle-check" style="font-size:5rem; color:#29c27f;"></i>
+        <h2 style="margin-top:20px;">Success!</h2>
+        <p>Your annual subscription is active. An invoice is on its way to your inbox.</p>
+        <a href="https://app.penneo.com/login" class="mock-btn btn-navy" style="max-width:250px; margin: 30px auto; display: block; text-align: center; text-decoration: none;">GO TO DASHBOARD</a>
+    </div>
+
+    <script>
+        const pricingData = {
+            'EUR': { ess: 88, plus: 154, sym: '€', text: 'EUR' },
+            'DKK': { ess: 834, plus: 1250, sym: 'kr.', text: 'DKK' },
+            'NOK': { ess: 1167, plus: 1792, sym: 'kr.', text: 'NOK' }
+        };
+        let activeCcy = 'EUR';
+
+        function setCurrency(ccy) {
+            activeCcy = ccy;
+            document.querySelectorAll('.ccy-btn').forEach(b => b.classList.toggle('active', b.innerText === ccy));
+            document.getElementById('pr-ess').innerText = pricingData[ccy].ess;
+            document.getElementById('pr-plus').innerText = pricingData[ccy].plus;
+            document.querySelectorAll('.cur-sym').forEach(s => s.innerText = pricingData[ccy].sym);
+        }
+
+        function setView(id) {
+            ['view-pricing', 'view-step-1', 'view-step-2', 'view-success'].forEach(v => {
+                document.getElementById(v).classList.add('hidden');
+            });
+            document.getElementById(id).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function checkout(plan, key) {
+            const monthly = pricingData[activeCcy][key];
+            const total = monthly * 12;
+            document.getElementById('side-plan-name').innerText = plan;
+            document.getElementById('side-plan-price').innerText = total.toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.querySelectorAll('.cur-sym-text').forEach(e => e.innerText = pricingData[activeCcy].text);
+            setView('view-step-1');
+        }
+
+        function goToStep2() {
+            const price = document.getElementById('side-plan-price').innerText;
+            const sym = pricingData[activeCcy].sym;
+            document.getElementById('pay-total-display').innerText = sym + price;
+            setView('view-step-2');
+        }
+
+        function processPayment() {
+            const b = document.querySelector('.btn-stripe');
+            b.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Processing...';
+            setTimeout(() => { setView('view-success'); }, 2000);
+        }
+    </script>
+</div>
+
+</body>
+</html>
